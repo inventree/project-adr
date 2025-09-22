@@ -1,4 +1,4 @@
-# InvenTree project
+# InvenTree project ADR
 
 InvenTree project wide docs and tools.
 This covers both ADRs for [InvenTree/InvenTree](https://github.com/inventree/) as well as other systems in the [InvenTree org](https://github.com/inventree/).
