@@ -1,9 +1,9 @@
 
-# InvenTree Project Documentation
+# InvenTree Project ADR Documentation
 
-These pages contain general documentation regarding the direction and governance of the InvenTree project. They target the general org, not only InvenTree/InvenTree, the inventory management system.
+These pages contain general documentation regarding the direction and (technical) governance of the InvenTree project. They target the general project, not only InvenTree/InvenTree (which contains the backend for the inventory management system).
 
-InvenTree consists of many components, working together to enable inventory management and more, with a focus on electronics (manufacturing). Decisions regarding the architecture of the project are documented as {term}`ADR` in the [docs/adr](adr/index.md) directory.
+InvenTree consists of many components, working together to enable inventory management and releated tasks, with a focus on electronics (manufacturing). Decisions regarding the architecture of the project are documented as {term}`ADR` in the [docs/adr](adr/index.md) directory.
 
 ```{toctree}
 :caption: Table of Contents
