@@ -3,8 +3,8 @@ ADR: 0001
 author: matmair
 status: "proposed"
 created: "2025-04-21"
-decided: "2025-04-21"
-date: "2025-04-21"
+decided: "2025-10-23"
+date: "2025-10-23"
 type: "governance"
 ---
 
