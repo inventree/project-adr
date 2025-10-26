@@ -8,7 +8,10 @@ date: "2025-10-26"
 type: "architecture"
 ---
 
+# Permissions and Access Control Revamp
+
 ## General Overview
+
 To allow precise segmentation of all things (as requested multiple times, in #7718 for example) 2 new concepts are introduced:
 
 - Workspaces
@@ -17,10 +20,13 @@ To allow precise segmentation of all things (as requested multiple times, in #77
 These can be seen as extensions of the existing concepts of Project Codes and Groups (in their usage for permission scoping).
 
 ## New Concepts
+
 ### Workspaces
+
 Workspaces can be thought of similar to organizations in GitHub, Groups in GitLab or Organizational Units in Active Directory. They borrow some names/ideas from these concepts, but are tailored to the needs of InvenTree and are not a superset.
 
-#### Business Rules
+#### Workspace Business Rules
+
 1. Workspaces support tree-like nesting, similar to part categories
 2. Workspaces have attributes to make navigating and organisation for the user easier. Each must have a name and slug and can have a short name, description, icon and color, an owner (user or group) and a responsible (user or group). The later two might be used for targeting notifications
 3. There is the default workspace "Default" (always pk 1, can not be deleted), which will be the default workspace for all models supporting workspaces
@@ -28,34 +34,38 @@ Workspaces can be thought of similar to organizations in GitHub, Groups in GitLa
 5. Users can be a member of multiple workspaces
 6. A user can only work in one workspace at a time / API call and can only create interactions between objects in that workspace or global objects (not assignable to any workspace)
 7. Plugins can ship models that support workspaces or chose to stay global (available in all workspaces) - which is the default
-8.  API paths for all models/objects/actions that support workspaces will be optionally extended by a workspace identifier, so that all queries are scoped to the required workspace. If no workspace is provided for a workspace-scoped endpoint, the "Default" workspace is assumed.
+8. API paths for all models/objects/actions that support workspaces will be optionally extended by a workspace identifier, so that all queries are scoped to the required workspace. If no workspace is provided for a workspace-scoped endpoint, the "Default" workspace is assumed.
 9. Usage of the workspace feature can be enabled in a global system setting; disabling it will hide all UI features related to workspaces. Internally, workspaces will still be assigned to all new/manipulated objects with the "Default" workspace. Existing workspace assignments will be preserved, but ignored.
 10. Disabling the workspace feature after it has been used would hide all objects not assigned to the "Default" workspace - therefore, I am considering adding a wizard to the Admin Center that would allow re-assigning all objects to the "Default" workspace before disabling the feature.
 
 Workspaces would be implemented as a single workspace model and by adding a generic foreign key to all models that support workspaces.
 
-#### Usage
+#### Workspace Usage
+
 Workspaces might be organized like this:
 
-```
+```text
 - Default (default : 1)
 - My Space Adventure (msa : 2)
-    - Suits (msa/suit : 3)
-        - First Eval Generation ( msa/suit/first : 4)
-        - Andromda Generation (msa/suit/andromeda : 5)
-        - Mars and Beyond Generation (msa/suit/mars : 6)
-    - Rockets ( msa/rocket : 7)
-    - Habitats ( msa/habitat : 8)
+  - Suits (msa/suit : 3)
+    - First Eval Generation ( msa/suit/first : 4)
+    - Andromda Generation (msa/suit/andromeda : 5)
+    - Mars and Beyond Generation (msa/suit/mars : 6)
+  - Rockets ( msa/rocket : 7)
+  - Habitats ( msa/habitat : 8)
 - Special Project X (spx : 9)
 ```
+
 Being assigned access to "My Space Adventure" would give access to workspaces 2,3,4,5,6,7,8
 Working in workspace 5 "msa/suit/andromeda" would only show objects to workspace 5
 Working in workspace 2 "msa" would only show objects assigned to workspaces 2
 
 ### Profiles
+
 Profiles are a way to represent a certain configuration area of InvenTree, there can be a number of different profiles types, but every object is only assigned to one profile per profile type at a time.
 
-#### Business Rules
+#### Profile Business Rules
+
 1. Profile types are defined globally
 2. Plugins can define new profile types
 3. Profiles are instances of a single profile type
@@ -67,24 +77,25 @@ Profiles are a way to represent a certain configuration area of InvenTree, there
 Model structure:
 
 - ProfileType
-    - name
-    - description
-    - source (core, plugin, unknown)
-    - plugin (nullable FK to Plugin model)
+  - name
+  - description
+  - source (core, plugin, unknown)
+  - plugin (nullable FK to Plugin model)
 - Profile
-    - profile_type (FK to ProfileType)
-    - name
-    - description
-    - settings (JSONField for profile specific settings)
-    - owner (nullable FK to User or Group)
+  - profile_type (FK to ProfileType)
+  - name
+  - description
+  - settings (JSONField for profile specific settings)
+  - owner (nullable FK to User or Group)
 - ProfileAssignment
-    - profile (FK to Profile)
-    - content_type (Generic FK to any model supporting profiles)
-    - object_id (Generic FK to any model supporting profiles)
-    - inherited (bool, if the assignment is inherited from a parent object, e.g. part category)
-    - inheritance_source (nullable Generic FK to the object the profile is inherited from)
+  - profile (FK to Profile)
+  - content_type (Generic FK to any model supporting profiles)
+  - object_id (Generic FK to any model supporting profiles)
+  - inherited (bool, if the assignment is inherited from a parent object, e.g. part category)
+  - inheritance_source (nullable Generic FK to the object the profile is inherited from)
 
-#### Usage
+#### Profile Usage
+
 Profiles might be used for:
 
 - Setting behavioral options for certain models (e.g. Part behavior profile, Supplier behavior profile)
@@ -97,6 +108,7 @@ In the first iteration, I plan to use ProfileAssigments as a lookup target for p
 ## Changes current things
 
 ### Existing Roles
+
 The role system would be preserved as is for reverse compatibility, but definitions of roles would move to the individual models / apps where possible to remove the coupling between `users` / and the apps (`parts`, `stock`, etc) as much as possible.
 
 ### New Roles model?
@@ -119,23 +131,28 @@ The documentation should be extended to include information about how the permis
 - Using any dynamic scoping that is not pre-defined - I want to avoid having to calculate permissions on the fly as much as possible for performance and audit logging (#9996) reasons
 - The ability for users to easily move objects between workspaces - this should be a deliberate action that requires admin access and is not done lightly (also because it is probably api-expensive)
 
-
-## Defintions
+## Definitions
 
 ### Global
+
 Something system wide, there is only one value / setting / instance for or of it. Can not be segmented any further. Example: System Settings, Users, Groups
 
 #### User
+
 A human actor interacting with the InvenTree system, represented by a User object, typically using the frontend
 
 #### Actor
+
 An entity that interacts with the system. This can be a user, automated system, workarea access station
 
 ### Model
+
 A Django model
 
 ### Object
+
 An instance of a Django model
 
 ### Action
+
 An operation that can be performed via the API. Either on an object, a collection of objects, a model or against the global system
