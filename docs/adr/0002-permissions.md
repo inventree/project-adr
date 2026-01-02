@@ -147,24 +147,25 @@ The documentation should be extended to include information about how the permis
 (1) She can view all parts, suppliers and prices because her job is also the create cost efficient designs.
 (2) But she has no edit rights at all.
 
-UC4: Barbara is a student worker supporting Monica.
+### UC4: Barbara is a student worker supporting Monica.
 (1) She can also see all the components.
 (2) But not the prices because this might leak too much data.
 
-UC5: Max is a tester working on the Astro project
+### UC5: Max is a tester working on the Astro project
 (1) He can add and modify test results to all parts related to the Astro project.
 (2) He can also see the results from the Moonshot project for comparison but he cannot edit them.
 (3) When Max goes on vacation for two weeks he introduces Oliver as his deputy who usually works on Moonshot. For the time of Max vacation Oliver can edit Moonshot and Astro parts.
 
-UC6: Bruce is working in the warehouse.
+### UC6: Bruce is working in the warehouse.
 (1) He can shuffle around stock items and boxes between locations.
 (2) But he cannot create new locations. This is up to Marvin who makes the floor plan of the warehouse.
 
-UC7: Mike works in the factory.
+### UC7: Mike works in the factory.
 (1) He can create parts that are manufactured, add serial numbers, and other data.
 (2) But he cannot add or modify parts for design as Marcus can.
 
-UC 8: Morgan is the administrator. He can do everything.
+### UC 8: Morgan is the administrator.
+(1) He can do everything.
 
 ## Definitions
 
