@@ -157,7 +157,7 @@ The documentation should be extended to include information about how the permis
 
 ### UC4: Barbara is a student worker supporting Monica
 
-(1) She can also see all the components.
+(1) She can see all the components.
 
 (2) But not the prices because this might leak too much data.
 
