@@ -151,7 +151,7 @@ The documentation should be extended to include information about how the permis
 
 ### UC3: Monika is a designer
 
-(1) She can view all parts, suppliers and prices because her job is also the create cost efficient designs.
+(1) She can view all parts, suppliers and prices because her job is to create cost efficient designs.
 
 (2) But she has no edit rights at all.
 
