@@ -144,9 +144,9 @@ The documentation should be extended to include information about how the permis
 ### UC2: Harold is working in the purchasing department
 
 (1) He adds suppliers and their prices to the parts.
-### UC2: Harold is working in the purchasing department
-(1) He adds suppliers and their prices to the parts.
+
 (2) But he cannot modify the parts or the parameters.
+
 (3) He can also create, edit and issue purchase orders.
 
 ### UC3: Monika is a designer
