@@ -144,10 +144,10 @@ The documentation should be extended to include information about how the permis
 ### UC2: Harold is working in the purchasing department
 
 (1) He adds suppliers and their prices to the parts.
-
+### UC2: Harold is working in the purchasing department
+(1) He adds suppliers and their prices to the parts.
 (2) But he cannot modify the parts or the parameters.
-
-(3) He can also create and edit purchase orders.
+(3) He can also create, edit and issue purchase orders.
 
 ### UC3: Monika is a designer
 
@@ -177,7 +177,7 @@ The documentation should be extended to include information about how the permis
 
 ### UC7: Mike works in the factory
 
-(1) He can create parts that are manufactured, add serial numbers, and other data.
+(1) He can create parts that are manufactured, add serial numbers and tests.
 
 (2) But he cannot add or modify parts for design as Marcus can.
 
