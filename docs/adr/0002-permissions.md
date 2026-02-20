@@ -177,9 +177,11 @@ The documentation should be extended to include information about how the permis
 
 ### UC7: Mike works in the factory
 
-(1) He can create parts that are manufactured, add serial numbers and tests.
+(1) He can create builds and stock items, add serial numbers and tests.
 
-(2) But he cannot add or modify parts for design as Marcus can.
+(2) He can create parts in the `msa/rocket` workpace
+
+(3) But he can not create parts in other workspaces
 
 ### UC 8: Morgan is the administrator
 
